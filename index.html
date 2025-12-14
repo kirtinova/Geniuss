@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <title>Flower Bouquet Maker</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <style>
+ body {
+ font-family: Arial, sans-serif;
+ background: linear-gradient(#fdfbfb, #ebedee);
+ margin: 0;
+ padding: 20px;
+ text-align: center;
+ }
+ h1 {
+ margin-bottom: 10px;
+ }
+ .controls {
+ margin-bottom: 20px;
+ }
+ input {
+ padding: 8px;
+ font-size: 16px;
+ width: 220px;
+ }
+ button {
+ padding: 8px 14px;
+ font-size: 16px;
+ margin-left: 6px;
+ cursor: pointer;
+ }
+ .bouquet {
+ position: relative;
+ width: 320px;
+ height: 420px;
+ margin: 0 auto;
+ background: #fff;
+ border-radius: 12px;
+ box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+ overflow: hidden;
+ }
+ .flower {
+ position: absolute;
+ width: 70px;
+ text-align: center;
+ animation: floatIn 0.6s ease-out;
+ }
+ .petal {
+ width: 50px;
+ height: 50px;
+ background: radial-gradient(circle at center, #ffd1dc, #ff69b4);
+ border-radius: 50%;
+ margin: 0 auto;
+ }
+ .name {
+ font-size: 12px;
+ margin-top: 4px;
+ color: #333;
+ word-break: break-word;
+ }
+ @keyframes floatIn {
+ from {
+ transform: translateY(40px) scale(0.5);
+ opacity: 0;
+ }
+ to {
+ transform: translateY(0) scale(1);
+ opacity: 1;
+ }
+ }
+ </style>
+</head>
+<body>
+ <h1> Bouquet of Names </h1>
+ <p>Type a name and add it as a flower to the bouquet.</p>
+ <div class="controls">
+ <input id="nameInput" type="text" placeholder="Enter a name" />
+ <button onclick="addFlower()">Add Flower</button>
+ <button onclick="clearBouquet()">Clear</button>
+ </div>
+ <div class="bouquet" id="bouquet"></div>
+ <script>
+ const bouquet = document.getElementById("bouquet");
+ function addFlower() {
+ const input = document.getElementById("nameInput");
+ const name = input.value.trim();
+ if (!name) return;
+ const flower = document.createElement("div");
+ flower.className = "flower";
+ const petal = document.createElement("div");
+ petal.className = "petal";
+ const label = document.createElement("div");
+ label.className = "name";
+ label.textContent = name;
+ flower.appendChild(petal);
+ flower.appendChild(label);
+ const x = Math.random() * 240 + 20;
+ const y = Math.random() * 300 + 20;
+ flower.style.left = x + "px";
+ flower.style.top = y + "px";
+ bouquet.appendChild(flower);
+ input.value = "";
+ }
+ function clearBouquet() {
+ bouquet.innerHTML = "";
+ }
+ </script>
+</body>
+</html>
